@@ -39,7 +39,7 @@ The deploy and test script is available [here](deploy.sh). Its a `bash` script u
 
 - Install Kubernete command line tool `kubectl` as instructed [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-- Create kubeconfig file under `~/.kube` directory as below with specifying respective values as config-file-name, cluster-name etc.
+- Create kubeconfig file under `~/.kube` directory as below with specifying respective values as config-file-name, cluster-name etc., sample kubeconfig file is [here](kubeconfig-example)
 
 `kubectl config --kubeconfig=<config-file-name>  set-context <context-name> —cluster=<cluster-name> --namespace=<namespace-name> --user=<user-name>`
 
