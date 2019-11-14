@@ -1,0 +1,49 @@
+# Create namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: technical-test
+
+# Deploy application in "technical-test" namespace
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: technical-test
+  labels:
+    run: app-version-info
+  name: app-version-info
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: app-version-info
+  template:
+    metadata:
+      labels:
+        run: app-version-info
+    spec:
+      containers:
+        - image: aparnamane/app-version-info:7d7db9e
+          name: app-version-info
+          ports:
+            - containerPort: 80
+
+# Create service to expose the application
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: technical-test
+  labels:
+    run: app-version-info
+  name: app-version-info-service
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: app-version-info
+  type: NodePort
