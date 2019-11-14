@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ## This script is used to deploy application along with service in Kubernetes cluster
+## Also Test the application for expected results
 
 NAMESPACE_NAME="technical-test"
 
@@ -23,7 +24,6 @@ sleep 15
 POD_NAME=$(kubectl get pod -n ${NAMESPACE_NAME} | grep -i app | awk '{print $1}')
 
 # Wait till pod is up and running
-
 
 while [[ $(kubectl get pods -n ${NAMESPACE_NAME} -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]] 
 do 
