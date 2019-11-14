@@ -7,6 +7,7 @@
   - [Application Image](#application-image)
   - [Application Deploy and Test Script](#application-deploy-and-test-script)
   - [Deploy Application in Kubernetes Cluster](#deploy-application-in-Kubernetes-cluster)
+  - [Deployment Testing Results](#deployment-testing-results)
   - [Enhancement Production Readiness](#enhancement-production-Readiness)
 
 
@@ -68,6 +69,38 @@ The deploy and test script is available [here](deploy.sh). Its a `bash` script u
 - Run the script
 
 `./deploy.sh`
+
+
+### Deployment Testing Results
+
+- This application deployment has been tested in the two node cluster running     kube version `1.13`
+
+- Results can be seen as below:
+
+```
+cloud_user@ip-10-0-1-101:~$ ./deploy.sh
+namespace/technical-test created
+deployment.apps/app-version-info created
+service/app-version-info-service created
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+app-version-info   0/1     1            0           0s
+NAME                       TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+app-version-info-service   NodePort   10.101.185.114   <none>        5000:32765/TCP   0s
+NAME                                READY   STATUS              RESTARTS   AGE
+app-version-info-5bf75cbbb8-mc7b8   0/1     ContainerCreating   0          0s
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   153  100   153    0     0  30600      0 --:--:-- --:--:-- --:--:-- 76500
+{
+  "myapplication": [
+    {
+      "description": "pre-interview technical test",
+      "lastcommitsha": "7d7db9e",
+      "version": "1.0"
+    }
+  ]
+}
+```
 
 
 ### Enhancement Production Readiness
